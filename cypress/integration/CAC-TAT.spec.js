@@ -38,6 +38,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     it('exibe mensagem de erro ao submeter o formulário com um email com formatação inválida', function () {
+        const textoLongo = 'LOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUMLOREM IPSUM'
         cy.get('#firstName')
             .should('be.visible')
             .type('Gabriel')
@@ -55,8 +56,8 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
         cy.get('#open-text-area')
             .should('be.visible')
-            .type('Socorro meu deus do céu me ajuda pelo amor de deus', {delay: 0} )
-            .should('have.value', 'Socorro meu deus do céu me ajuda pelo amor de deus')
+            .type( textoLongo, {delay: 0} )
+            .should('have.value', textoLongo)
 
         cy.contains('Enviar')
             .should('be.visible')
@@ -71,7 +72,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
         cy.get('#phone')
             .should('be.visible')
             .type('um texto qualquer')
-            .should('not.have.value')
+            .should('have.value', '')
     })
 
     it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulario', function () {
@@ -113,28 +114,28 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .type('Gabriel')
             .should('have.value', 'Gabriel')
             .clear()
-            .should('not.have.value')
+            .should('have.value', '')
 
         cy.get('#lastName')
             .should('be.visible')
             .type('Duarte')
             .should('have.value', 'Duarte')
             .clear()
-            .should('not.have.value')
+            .should('have.value', '')
 
         cy.get('#email')
             .should('be.visible')
             .type('gabrielzito@qa.com.br')
             .should('have.value', 'gabrielzito@qa.com.br')
             .clear()
-            .should('not.have.value')
+            .should('have.value', '')
 
         cy.get('#phone')
             .should('be.visible')
             .type('123456789')
             .should('have.value', '123456789')
             .clear()
-            .should('not.have.value')
+            .should('have.value', '')
     })
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
