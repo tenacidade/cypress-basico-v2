@@ -29,7 +29,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .type('Socorro meu deus do céu me ajuda pelo amor de deus', {delay: 0} )
             .should('have.value', 'Socorro meu deus do céu me ajuda pelo amor de deus')
 
-        cy.get('.button')
+        cy.contains('Enviar')
             .should('be.visible')
             .click()
 
@@ -58,7 +58,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .type('Socorro meu deus do céu me ajuda pelo amor de deus', {delay: 0} )
             .should('have.value', 'Socorro meu deus do céu me ajuda pelo amor de deus')
 
-        cy.get('.button')
+        cy.contains('Enviar')
             .should('be.visible')
             .click()
 
@@ -99,7 +99,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .should('be.visible')
             .click()
 
-        cy.get('.button')
+        cy.contains('Enviar')
             .should('be.visible')
             .click()
 
@@ -138,7 +138,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
-        cy.get('.button')
+        cy.contains('Enviar')
             .should('be.visible')
             .click()
 
@@ -146,7 +146,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .should('be.visible')
     })
 
-    it.only('envia o formulário com sucesso usando um comando customizado', function () {
+    it('envia o formulário com sucesso usando um comando customizado', function () {
         cy.fillMandatoryFieldsAndSubmit('gabriel', 'ribeiro', 'das@dsa.com')
     })
 })

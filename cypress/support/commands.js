@@ -46,7 +46,7 @@ cy.get('#email')
     .type('Socorro meu deus do céu me ajuda pelo amor de deus', {delay: 0} )
     .should('have.value', 'Socorro meu deus do céu me ajuda pelo amor de deus')
 
-cy.get('.button')
+cy.contains('Enviar')
     .should('be.visible')
     .click()
 
