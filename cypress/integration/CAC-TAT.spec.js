@@ -29,7 +29,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .type('Socorro meu deus do céu me ajuda pelo amor de deus', {delay: 0} )
             .should('have.value', 'Socorro meu deus do céu me ajuda pelo amor de deus')
 
-        cy.contains('Enviar')
+        cy.contains('button', 'Enviar')
             .should('be.visible')
             .click()
 
@@ -59,7 +59,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .type( textoLongo, {delay: 0} )
             .should('have.value', textoLongo)
 
-        cy.contains('Enviar')
+        cy.contains('button', 'Enviar')
             .should('be.visible')
             .click()
 
@@ -100,7 +100,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .should('be.visible')
             .click()
 
-        cy.contains('Enviar')
+        cy.contains('button', 'Enviar')
             .should('be.visible')
             .click()
 
@@ -139,7 +139,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
     })
 
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
-        cy.contains('Enviar')
+        cy.contains('button', 'Enviar')
             .should('be.visible')
             .click()
 
