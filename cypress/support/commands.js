@@ -53,3 +53,11 @@ cy.contains('button', 'Enviar')
 cy.get('.success')
     .should('be.visible')
 })
+
+Cypress.Commands.add('assertTenResultsPlusMoreResultsButton', () => {
+    cy.get('.nrn-react-div')
+      .should('have.length', 12)
+
+    cy.get('.result--more__btn')
+      .should('contain', 'Mais resultados')
+  })
