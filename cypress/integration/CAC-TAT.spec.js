@@ -183,4 +183,19 @@ describe('Central de Atendimento ao Cliente TAT', function () {
                 cy.wrap($radio).should('be.checked')
             })
     })
+
+    it.only('marca ambos checkboxes, depois desmarca o ultimo', function () {
+        cy.get('input[type="checkbox"]')
+            .as('checkboxes')
+            .check()
+
+        cy.get('@checkboxes')
+            .each(checkbox => {
+                expect(checkbox[0].checked).to.equal(true)
+            })
+
+        cy.get('@checkboxes')
+            .last()
+            .uncheck()
+    })
 })
