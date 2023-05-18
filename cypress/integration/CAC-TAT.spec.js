@@ -209,6 +209,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     it('seleciona um arquivo da pasta fixture, realizando upload', function() {      
         cy.get('input[type="file"]')
+            .should('not.have.value')
             .selectFile('cypress/fixtures/teste.txt')
             .then(input => {
                 expect(input[0].files[0].name).to.equal('teste.txt')
@@ -217,6 +218,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     it('seleciona um arquivo da pasta fixture, realizando upload com drag and drop', function() {      
         cy.get('input[type="file"]')
+            .should('not.have.value')
             .selectFile('cypress/fixtures/teste.txt', 
             { action: 'drag-drop'})
             .then(input => {
@@ -226,12 +228,29 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     it.skip('seleciona multiplos arquivos, realizando upload com drag and drop', function() {      
         cy.get('input[type="file"]')
+            .should('not.have.value')
             .selectFile([
                 'cypress/fixtures/teste.txt', 
                 'cypress/fixtures/example.json'
             ], { action: 'drag-drop'})
-        //not working in this cypress version, but they fixed it on 9.4 version, so we'll skip it
+            .then(input => {
+                expect(input[0].files[0].name).to.equal('teste.txt')
+                expect(input[0].files[1].name).to.equal('example.json')
+            })
 
+            //not working in this cypress version, fixed in 9.4 version, so we'll skip this.
+    })
+
+    it.only('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', function() {      
+        cy.fixture('teste.txt')
+            .as('testetxt')
+            
+        cy.get('input[type="file"]')
+            .selectFile('@testetxt', 
+            { action: 'drag-drop'})
+            .then(input => {
+                expect(input[0].files[0].name).to.equal('teste.txt')
+            })
     })
 
 
