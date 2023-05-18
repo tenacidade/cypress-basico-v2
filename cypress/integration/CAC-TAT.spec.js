@@ -75,7 +75,7 @@ describe('Central de Atendimento ao Cliente TAT', function () {
             .should('have.value', '')
     })
 
-    it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulario', function () {
+    it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulario', function () {
         cy.get('#firstName')
             .should('be.visible')
             .type('Gabriel')
@@ -201,9 +201,38 @@ describe('Central de Atendimento ao Cliente TAT', function () {
 
     it('marca ambos checkboxes, depois desmarca o ultimo, sem alias e sem chai.js', function () {
         cy.get('input[type="checkbox"]')
-        .check()
-        .should('be.checked')
-        .last()
-        .uncheck()
+            .check()
+            .should('be.checked')
+            .last()
+            .uncheck()
     })
+
+    it('seleciona um arquivo da pasta fixture, realizando upload', function() {      
+        cy.get('input[type="file"]')
+            .selectFile('cypress/fixtures/teste.txt')
+            .then(input => {
+                expect(input[0].files[0].name).to.equal('teste.txt')
+            })
+    })
+
+    it('seleciona um arquivo da pasta fixture, realizando upload com drag and drop', function() {      
+        cy.get('input[type="file"]')
+            .selectFile('cypress/fixtures/teste.txt', 
+            { action: 'drag-drop'})
+            .then(input => {
+                expect(input[0].files[0].name).to.equal('teste.txt')
+            })
+    })
+
+    it.skip('seleciona multiplos arquivos, realizando upload com drag and drop', function() {      
+        cy.get('input[type="file"]')
+            .selectFile([
+                'cypress/fixtures/teste.txt', 
+                'cypress/fixtures/example.json'
+            ], { action: 'drag-drop'})
+        //not working in this cypress version, but they fixed it on 9.4 version, so we'll skip it
+
+    })
+
+
 })
